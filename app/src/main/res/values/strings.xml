@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MySQL Example Project</string>
+    <string name="get_data">GET DATA</string>
+    <string name="progress">Progress</string>
+    <string name="name">name</string>
+    <string name="price">price</string>
+</resources>
