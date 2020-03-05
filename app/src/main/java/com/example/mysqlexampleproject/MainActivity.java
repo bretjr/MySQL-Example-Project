@@ -51,31 +51,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        try {
-
-            // Get a connection to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://10.0.0.238:3306/example", "root", "sept0211");
-            // Create a statement
-            Statement stmt = conn.createStatement();
-            // Execute a SQL query
-            ResultSet rs = stmt.executeQuery("select * from fruits");
-            // Process the result set
-            while(rs.next()) {
-                System.out.println(rs.getString("name") + " , " + rs.getString("price"));
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
     }
 
     private class GetData extends AsyncTask<String, String, String> {
 
         String msg = "";
+
         // JDBC driver name and database url
         static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        static final String URL = "jdbc:mysql://10.0.0.238:3306/example";
+        static final String USER = "bret";
+        static final String PASSWORD = "sept0211";
 
         @Override
         protected void onPreExecute() {
@@ -93,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 Class.forName(JDBC_DRIVER);
 
                 // Connect to Database
-                conn = DriverManager.getConnection("jdbc:mysql://10.0.0.238:3306/example", "****", "********");
+                conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
                 // Statement setup
                 stmt = conn.createStatement();
@@ -121,19 +107,29 @@ public class MainActivity extends AppCompatActivity {
                 connError.printStackTrace();
 
             } finally {
+
                 // Close stmt if left open
                 try {
+
                     if (stmt != null)
                         stmt.close();
+
                 } catch (SQLException e) {
+
                     e.printStackTrace();
+
                 }
+
                 // Close conn if left open
                 try {
+
                     if (conn != null)
                         conn.close();
+
                 } catch (SQLException e) {
+
                     e.printStackTrace();
+
                 }
             }
             return null;
